@@ -118,9 +118,11 @@ $(".tabbed").each(function(){
 $(window).load(function(){
 //slider1
 var OptionsSlider = {
-		autoslides: 1,
+		//change this option to 0, normally is set to 1
+		autoslides: 0,
 		delay:9000,
-		change_slide_on_click: 1,
+		//change this option to 0, normally is set to 1
+		change_slide_on_click: 0,
 		pause_on_hover: 0,
 		pause_on_action: 1
 	}
