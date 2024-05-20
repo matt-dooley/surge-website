@@ -70,7 +70,7 @@ if(!$errors) {
 	'User agent: '.$user_agent;	
 
 	//sending mail
-	$ok = mail("PUT YOUR E-MAIL HERE","Message MultiPurpose Template", $content, $headers);
+	$ok = mail("mdooley86@yahoo.com","Message MultiPurpose Template", $content, $headers);
 	if($ok) {
 		$response['msgStatus'] = "ok";
 		$response['message'] = "Thank you for contacting the team at example.com.\nWe will respond to your inquiry as soon as possible.";
