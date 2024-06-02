@@ -121,7 +121,7 @@ body.boxed.f07 {background: url("images/frames/frame06.png") center 0 repeat-y, 
 body.boxed.f08 {background: url("images/frames/frame07.png") center 0 repeat-y, url("images/patterns/pattern05.png") left top repeat; background-color: #d6d6d6;}
 body.boxed.f09 {background: url("images/frames/frame08.png") center 0 repeat-y, url("images/patterns/pattern05.png") left top repeat; background-color: #eee;}
 
-header {position: relative; z-index: 50; background: #fff; box-shadow: 0 0 4px rgba(0,0,0,0.3);}
+header {position: relative; z-index: 50; background: #fff; box-shadow: 0 4px 4px rgba(0,0,0,0.3);}
 header>section.top {position: relative; z-index: 20; height: 30px; margin: 0; box-shadow: inset 0 -2px 2px rgba(0,0,0,0.05); background: #747474; color: #fff; font-size: 0.846em; text-align: right;}
 header>section.top>div {max-width: 940px; margin: 0 auto;}
 
@@ -193,7 +193,7 @@ header .top .searchform input {width: 170px;}
 	header>section {padding: 0 20px;}
 	.boxed header>section.main-header {margin: 0 -20px; padding: 0 40peaderx;}
 }
-@media (max-width: 800px) {
+@media (max-width: 900px) {
 	header>section {margin: 0 -20px; padding: 5px 20px 0;}
 	header>section.top {height: auto; padding: 5px 20px 0; text-align: right;}
 	header>section.top nav {width: 280px;}
@@ -216,6 +216,8 @@ header .top .searchform input {width: 170px;}
 	header nav.social {text-align: center;}
 	header>section.main-header nav {float: none; clear: left;}
 	header>section.main-header nav .select {width: auto;}
+
+	header img {height: auto; width: 100%; padding-top: 10px;}
 }
 @media (max-width: 620px) {
 	header>section.top p {float: none; text-align: center;}
@@ -232,6 +234,8 @@ header .top .searchform input {width: 170px;}
 	header>section.top nav .select {display: block; width: auto; margin: 2px 0 5px;}
 	
 	.boxed header>section.main-header {padding: 0 30px;}
+
+	header img {width: 90%; height: auto;}
 }
 
 
