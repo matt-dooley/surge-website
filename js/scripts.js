@@ -159,60 +159,109 @@ $(".tabbed").each(function(){
 // });
 
 // contact form 
-$(".contact-form").each(function(){
-	var form = $(this);
-	var button = form.find("button[type=submit]");
-	var buttonText = button.html();
+$(".contact-form").each(function() {
+    var form = $(this);
+    var button = form.find("button[type=submit]");
+    var buttonText = button.html();
 
-	button.click(function(e){
-		e.preventDefault();
+    button.click(function(e) {
+        e.preventDefault(); // Prevent the default form submission
 
-		var formTop = (form.offset().top) - 45;
-		var url = form.attr("action");
-		var data = form.serialize();
-		form.find("input, select, textarea, span").removeClass("error");
-		form.find(".msg").remove();
+        var formTop = (form.offset().top) - 45;
+        var url = form.attr("action");
+        var data = form.serialize();
+        form.find("input, select, textarea, span").removeClass("error");
+        form.find(".msg").remove();
 
-		button.html("Sending...");
+        button.html("Sending..."); // Show sending state
 
-		$.post(url, data, function(response){
-			var status = response.msgStatus;
-			var msg = response.message;
+        // Use fetch API to submit the form
+        fetch(url, {
+            method: 'POST',
+            body: new URLSearchParams(data),
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(response => {
+            var status = response.msgStatus;
+            var msg = response.message;
 
-			if(status == "ok") {
-				form.prepend('<p class="msg success"><a class="hide" href="#">hide this</a>' + msg + '</p>');
-				form.find("input, select, textarea").val("");
-				var valField = form.find(".select .value");
-				var selectField = valField.siblings("select");
-				var selectedText = selectField.find("option").eq(0).html();
-				valField.html(selectedText);
-				
-			} else if(status == "error") {
-				if(response.errorFields.length) {
-					var fields = response.errorFields;
-					for (i = 0; i < fields.length; i++) {
-						form.find("#" + fields[i]).addClass("error");
-						form.find("select#" + fields[i]).parents(".select").addClass("error");
-					}
-					var errors = response.errors;
-					var errorList = "<ul>";
-					for (i = 0; i < errors.length; i++) {
-						errorList += "<li>" + errors[i] + "</li>";
-					}
-					errorList += "</ul>";
-					form.prepend('<div class="msg error"><a class="hide" href="#">hide this</a><p>There were errors in your form:</p>' + errorList + '<p>Please make the necessary changes and re-submit your form</p></div>');
+            if (status === "ok") {
+                form.prepend('<p class="msg success"><a class="hide" href="#">hide this</a>' + msg + '</p>');
+                form.find("input, select, textarea").val("");
+                var valField = form.find(".select .value");
+                var selectField = valField.siblings("select");
+                var selectedText = selectField.find("option").eq(0).html();
+                valField.html(selectedText);
 
-				} else form.prepend('<p class="msg error"><a class="hide" href="#">hide this</a>' + msg + '</p>');
-			}
-			$(".msg a.hide").click(function(e){
-				e.preventDefault();
-				$(this).parent().slideUp();
-			});
-			button.html(buttonText);
-			window.scrollTo(0, formTop);
-		}, 'json');
-	})
+                // Redirect to thank-you page after a slight delay
+                setTimeout(function() {
+                    window.location.href = 'https://surgepowerservice.com/thank-you.html'; // Change to your thank-you page URL
+                }, 2000); // Adjust the delay as needed
+                
+            } else if (status === "error") {
+                if (response.errorFields.length) {
+                    var fields = response.errorFields;
+                    for (var i = 0; i < fields.length; i++) {
+                        form.find("#" + fields[i]).addClass("error");
+                        form.find("select#" + fields[i]).parents(".select").addClass("error");
+                    }
+                    var errors = response.errors;
+                    var errorList = "<ul>";
+                    for (var i = 0; i < errors.length; i++) {
+                        errorList += "<li>" + errors[i] + "</li>";
+                    }
+                    errorList += "</ul>";
+                    form.prepend('<div class="msg error"><a class="hide" href="#">hide this</a><p>There were errors in your form:</p>' + errorList + '<p>Please make the necessary changes and re-submit your form</p></div>');
+
+                } else {
+                    form.prepend('<p class="msg error"><a class="hide" href="#">hide this</a>' + msg + '</p>');
+                }
+            }
+
+            // Hide messages functionality
+            $(".msg a.hide").click(function(e) {
+                e.preventDefault();
+                $(this).parent().slideUp();
+            });
+            
+            button.html(buttonText); // Reset button text after processing
+            window.scrollTo(0, formTop); // Scroll to the form
+
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            form.prepend('<p class="msg error"><a class="hide" href="#">hide this</a>Your submission failed. Please try again.</p>');
+            button.html(buttonText); // Reset button text on failure
+        });
+    });
 });
+
+// const form = document.querySelector('form');
+//     form.addEventListener('submit', e => {
+//         e.preventDefault();
+//         const formData = new FormData(form);
+//         const xhr = new XMLHttpRequest();
+//         xhr.open('POST', form.action, true);
+//         xhr.setRequestHeader('Accept', 'application/json');
+//         xhr.onreadystatechange = () => {
+//             if (xhr.readyState !== XMLHttpRequest.DONE) return;
+//             if (xhr.status === 200) {
+//                 form.reset();
+//                 alert('Thank you for your message. We will get back to you soon.');
+//             } else {
+//                 alert('Sorry, there was an error. Please try again later.');
+//             }
+//         };
+//         xhr.send(formData);
+//     });
+
+
+
+
+
 
 
 $(window).load(function(){
