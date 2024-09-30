@@ -113,7 +113,6 @@ $(".tabbed").each(function(){
 	});
 });
 
-
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('.contact-form'); // Selecting by class
 
@@ -127,6 +126,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(form); // Create FormData object
             console.log('Form submitted'); // Log form submission
 
+            // Uncomment the next line to test redirection directly
+             window.location.href = form.getAttribute('data-redirect');
+
             fetch(form.action, {
                 method: 'POST',
                 body: formData,
@@ -137,8 +139,9 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => {
                 console.log('Response received:', response); // Log the response
                 if (response.ok) {
-                    // Redirect to the URL specified in data-redirect attribute
-                    window.location.href = form.getAttribute('data-redirect');
+					// Redirect to the URL specified in data-redirect attribute
+                    alert('Form submitted successfully! Redirecting...'); // Alert before redirect
+                    window.location.href = form.getAttribute('data-redirect'); // Redirect to success page
                 } else {
                     alert('There was an issue with your submission.'); // Show error message
                 }
