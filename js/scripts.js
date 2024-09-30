@@ -113,7 +113,42 @@ $(".tabbed").each(function(){
 	});
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('.contact-form'); // Selecting by class
 
+    console.log('DOM fully loaded and parsed'); // Log statement
+    console.log('Form element:', form); // Check if form is found
+
+    if (form) {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const formData = new FormData(form); // Create FormData object
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Redirect to the URL specified in data-redirect attribute
+                    window.location.href = form.getAttribute('data-redirect');
+                } else {
+                    alert('There was an issue with your submission.'); // Show error message
+                }
+            })
+            .catch(error => {
+                console.error('Form submission error:', error); // Log the error
+                alert('There was an error submitting the form.'); // Show error message
+            });
+        });
+    } else {
+        console.error('Form not found'); // Log if form is not found
+    }
+});
 
 $(window).load(function(){
 //slider1

@@ -142,6 +142,7 @@
 				<p><button name="send" type="submit" value="1">Sign Up</button></p>
 			</form> -->
 
+
 			<form action="https://usebasin.com/f/b3faa2b04831" method="POST" class="contact-form" data-redirect="https://surgepowerservice.com/index.html">
 				
 				<p class="full">
@@ -249,35 +250,7 @@
 	</section>
 
 
-	<script>
-		document.getElementById('contact-form').addEventListener('submit', function(event) {
-			event.preventDefault(); // Prevent default form submission behavior
 	
-			const form = event.target;
-			const formData = new FormData(form); // Gather form data
-	
-			// Send the form data to Basin using fetch
-			fetch(form.action, {
-				method: 'POST',
-				body: formData,
-				headers: {
-					'Accept': 'application/json'
-				}
-			})
-			.then(response => {
-				if (response.ok) {
-					// Redirect to the thank-you page on success
-					window.location.href = "https://surgepowerservice.com/index.html";
-				} else {
-					alert('There was an issue with your submission.');
-				}
-			})
-			.catch(error => {
-				console.error('Error submitting form:', error);
-				alert('There was an error submitting the form. Please try again.');
-			});
-		});
-	</script>
 
 	<footer>
 		<section class="widgets">
@@ -314,6 +287,7 @@
 	<!--[if lt IE 9]>
 		<script type="text/javascript" src="js/ie.js"></script>
 	<![endif]-->
+
 </body>
 
 </html>
