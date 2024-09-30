@@ -116,8 +116,8 @@ $(".tabbed").each(function(){
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('.contact-form'); // Selecting by class
 
-    console.log('DOM fully loaded and parsed'); // Log statement
-    console.log('Form element:', form); // Check if form is found
+    console.log('DOM fully loaded and parsed');
+    console.log('Form element:', form);
 
     if (form) {
         form.addEventListener('submit', function(event) {
@@ -126,8 +126,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(form); // Create FormData object
             console.log('Form submitted'); // Log form submission
 
-            // Uncomment the next line to test redirection directly
-             window.location.href = form.getAttribute('data-redirect');
+			// Uncomment the next line to test redirection directly
+            // Test the redirect immediately
+            window.location.href = form.getAttribute('data-redirect'); // Check if this line works
 
             fetch(form.action, {
                 method: 'POST',
@@ -141,6 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (response.ok) {
 					// Redirect to the URL specified in data-redirect attribute
                     alert('Form submitted successfully! Redirecting...'); // Alert before redirect
+					console.log('Redirecting to:', form.getAttribute('data-redirect'));
                     window.location.href = form.getAttribute('data-redirect'); // Redirect to success page
                 } else {
                     alert('There was an issue with your submission.'); // Show error message
@@ -155,6 +157,63 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Form not found'); // Log if form is not found
     }
 });
+
+// // contact form 
+// $(".contact-form").each(function(){
+// 	var form = $(this);
+// 	var button = form.find("button[type=submit]");
+// 	var buttonText = button.html();
+
+// 	button.click(function(e){
+// 		e.preventDefault();
+
+// 		var formTop = (form.offset().top) - 45;
+// 		var url = form.attr("action");
+// 		var data = form.serialize();
+// 		form.find("input, select, textarea, span").removeClass("error");
+// 		form.find(".msg").remove();
+
+// 		button.html("Sending...");
+
+// 		$.post(url, data, function(response){
+// 			var status = response.msgStatus;
+// 			var msg = response.message;
+
+// 			if(status == "ok") {
+// 				form.prepend('<p class="msg success"><a class="hide" href="#">hide this</a>' + msg + '</p>');
+// 				form.find("input, select, textarea").val("");
+// 				var valField = form.find(".select .value");
+// 				var selectField = valField.siblings("select");
+// 				var selectedText = selectField.find("option").eq(0).html();
+// 				valField.html(selectedText);
+				
+// 			} else if(status == "error") {
+// 				if(response.errorFields.length) {
+// 					var fields = response.errorFields;
+// 					for (i = 0; i < fields.length; i++) {
+// 						form.find("#" + fields[i]).addClass("error");
+// 						form.find("select#" + fields[i]).parents(".select").addClass("error");
+// 					}
+// 					var errors = response.errors;
+// 					var errorList = "<ul>";
+// 					for (i = 0; i < errors.length; i++) {
+// 						errorList += "<li>" + errors[i] + "</li>";
+// 					}
+// 					errorList += "</ul>";
+// 					form.prepend('<div class="msg error"><a class="hide" href="#">hide this</a><p>There were errors in your form:</p>' + errorList + '<p>Please make the necessary changes and re-submit your form</p></div>');
+
+// 				} else form.prepend('<p class="msg error"><a class="hide" href="#">hide this</a>' + msg + '</p>');
+// 			}
+// 			$(".msg a.hide").click(function(e){
+// 				e.preventDefault();
+// 				$(this).parent().slideUp();
+// 			});
+// 			button.html(buttonText);
+// 			window.scrollTo(0, formTop);
+// 		}, 'json');
+// 	})
+// });
+
 
 $(window).load(function(){
 //slider1
@@ -1243,62 +1302,6 @@ $(".landing-form form").each(function(){
 					}	
 				}
 				$('<p class="msg error"><a class="hide" href="#">hide this</a>' + msg + '</p>').insertAfter(formHeading);
-			}
-			$(".msg a.hide").click(function(e){
-				e.preventDefault();
-				$(this).parent().slideUp();
-			});
-			button.html(buttonText);
-			window.scrollTo(0, formTop);
-		}, 'json');
-	})
-});
-
-// contact form 
-$(".contact-form").each(function(){
-	var form = $(this);
-	var button = form.find("button[type=submit]");
-	var buttonText = button.html();
-
-	button.click(function(e){
-		e.preventDefault();
-
-		var formTop = (form.offset().top) - 45;
-		var url = form.attr("action");
-		var data = form.serialize();
-		form.find("input, select, textarea, span").removeClass("error");
-		form.find(".msg").remove();
-
-		button.html("Sending...");
-
-		$.post(url, data, function(response){
-			var status = response.msgStatus;
-			var msg = response.message;
-
-			if(status == "ok") {
-				form.prepend('<p class="msg success"><a class="hide" href="#">hide this</a>' + msg + '</p>');
-				form.find("input, select, textarea").val("");
-				var valField = form.find(".select .value");
-				var selectField = valField.siblings("select");
-				var selectedText = selectField.find("option").eq(0).html();
-				valField.html(selectedText);
-				
-			} else if(status == "error") {
-				if(response.errorFields.length) {
-					var fields = response.errorFields;
-					for (i = 0; i < fields.length; i++) {
-						form.find("#" + fields[i]).addClass("error");
-						form.find("select#" + fields[i]).parents(".select").addClass("error");
-					}
-					var errors = response.errors;
-					var errorList = "<ul>";
-					for (i = 0; i < errors.length; i++) {
-						errorList += "<li>" + errors[i] + "</li>";
-					}
-					errorList += "</ul>";
-					form.prepend('<div class="msg error"><a class="hide" href="#">hide this</a><p>There were errors in your form:</p>' + errorList + '<p>Please make the necessary changes and re-submit your form</p></div>');
-
-				} else form.prepend('<p class="msg error"><a class="hide" href="#">hide this</a>' + msg + '</p>');
 			}
 			$(".msg a.hide").click(function(e){
 				e.preventDefault();
