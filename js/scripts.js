@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 			// Uncomment the next line to test redirection directly
             // Test the redirect immediately
-            window.location.href = form.getAttribute('data-redirect'); // Check if this line works
+            //window.location.href = form.getAttribute('data-redirect'); // Check if this line works
 
             fetch(form.action, {
                 method: 'POST',
