@@ -88,7 +88,11 @@
 			<h1>Storm Response</h1>
 			<h2>Join our team!</h2>
 			<p>To ensure you're on our roster for quick response during storm events, please complete the form below. By registering, you'll be added to our list for immediate call-outs and updates related to storm situations. Our team will review your submission and reach out if your assistance is needed.</p>
-			<form action="send-contact.php" method="post" class="contact-form">
+			
+			
+			
+			
+			<!-- <form action="send-contact.php" method="post" class="contact-form">
 				
 				<p class="full"></p>
 					<label for="name">Legal First</label><input name="name" id="name">
@@ -136,7 +140,83 @@
 				
 				
 				<p><button name="send" type="submit" value="1">Sign Up</button></p>
+			</form> -->
+
+			<form action="https://usebasin.com/f/b3faa2b04831" method="POST" class="contact-form">
+				
+				<p class="full">
+					<label for="first-name">Legal First</label>
+					<input type="text" name="first-name" id="first-name" required>
+				</p>
+
+				<p class="full">
+					<label for="last-name">Legal Last</label>
+					<input type="text" name="last-name" id="last-name" required>
+				</p>
+
+				<p class="full">
+					<label for="phone">Phone #</label>
+					<input type="text" name="phone" id="phone" required>
+				</p>
+
+				<p class="full">
+					<label for="classification">Classification</label>
+					<input type="text" name="classification" id="classification">
+				</p>
+
+				<p class="full">
+					<label for="email">Email</label>
+					<input type="email" name="email" id="email" required>
+				</p>
+
+				<p class="full">
+					<label for="glove-size">Glove/Sleeve Size</label>
+					<input type="text" name="glove-size" id="glove-size">
+				</p>
+
+				<p class="full">
+					<label for="local">Local</label>
+					<input type="text" name="local" id="local">
+				</p>
+
+				<p class="full">
+					<label for="ticket">Ticket #</label>
+					<input type="text" name="ticket" id="ticket">
+				</p>
+
+				<p class="full">
+					<label for="dob">Date of Birth</label>
+					<input type="date" name="dob" id="dob">
+				</p>
+
+				<p class="full">
+					<label for="license">Driver License # & State</label>
+					<input type="text" name="license" id="license">
+				</p>
+
+				<!-- <p class="full">
+					<label for="cdl">CDL? (Yes/No)</label>
+					<input type="text" name="cdl" id="cdl">
+				</p> -->
+
+				<p class="full">
+					<label for="cdl">CDL? (Yes/No)</label>
+					<select name="cdl" id="cdl" required>
+						<option value="">--Please choose an option--</option>
+						<option value="yes">Yes</option>
+						<option value="no">No</option>
+					</select>
+				</p>
+				
+				<p>
+					<button name="send" type="submit" value="1">Sign Up</button>
+				</p>
+
 			</form>
+
+
+
+
 		</article>
 
 
