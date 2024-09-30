@@ -113,6 +113,7 @@ $(".tabbed").each(function(){
 	});
 });
 
+
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('.contact-form'); // Selecting by class
 
@@ -124,6 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault(); // Prevent the default form submission
 
             const formData = new FormData(form); // Create FormData object
+            console.log('Form submitted'); // Log form submission
 
             fetch(form.action, {
                 method: 'POST',
@@ -133,6 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .then(response => {
+                console.log('Response received:', response); // Log the response
                 if (response.ok) {
                     // Redirect to the URL specified in data-redirect attribute
                     window.location.href = form.getAttribute('data-redirect');
